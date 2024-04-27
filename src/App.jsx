@@ -130,6 +130,7 @@ function DialogB() {
     </div>
     <div className="decals">
     <div className="decals--container">
+    {snap.element}<br/>
     {"Equipe >=> A. CORBILLET, D. DE DIETRICH, S. EA, M. MANNONI, E. REUCHIN"} <br/>
     {"Encadrants >=> G. LUCAS-LECLIN et J. MOREAU"}
     </div>
@@ -166,6 +167,19 @@ function DialogB() {
 }
 
 function ModalCard() {
+  const dico={
+    0:"Mosaic",
+    1:"Laser & Beam extender",
+    2:"Galvanomètre",
+    3:"Scan Lenses",
+    4:"Tube Lense",
+    5:"Cuve",
+    6:"Lame de Schmit",
+    7:"Miroir Sphérique",
+    8:"Embryon de poulet",
+    9:"Miroir Dicroique",
+    10:"Photomultiplicateur",
+  }
   const snap = useSnapshot(state_v)
   const [animation, setAnimation] = useState(false);
   const variants = {
@@ -183,6 +197,26 @@ function ModalCard() {
     setClic(true);
     // console.log(snap.etape);
     state_v.etape = (snap.etape + 1) % 11
+    if ((snap.etape + 1) % 11==5){
+      state_v.fluorays = false
+      state_v.rays = false
+    }
+    if ((snap.etape + 1) % 11==6){
+      state_v.fluorays = false
+      state_v.rays = true
+    }
+    if ((snap.etape + 1) % 11==7){
+      state_v.fluorays = false
+      state_v.rays = true
+    }
+    if ((snap.etape + 1) % 11==8){
+      state_v.fluorays = true
+      state_v.rays = false
+    }
+    if ((snap.etape + 1) % 11==10){
+      state_v.fluorays = true
+      state_v.rays = true
+    }
   };
 
   const handleClick_prev= (event) => {
@@ -190,12 +224,33 @@ function ModalCard() {
     // Mettre à jour l'état du clic
     setClic(true);
     state_v.etape = (snap.etape - 1 + 11) % 11
+    if ((snap.etape - 1 + 11) % 11==5){
+      state_v.fluorays = false
+      state_v.rays = false
+    }
+    if ((snap.etape - 1 + 11) % 11==6){
+      state_v.fluorays = false
+      state_v.rays = true
+    }
+    if ((snap.etape - 1 + 11) % 11==7){
+      state_v.fluorays = false
+      state_v.rays = true
+    }
+    if ((snap.etape - 1 + 11) % 11==8){
+      state_v.fluorays = true
+      state_v.rays = false
+    }
+    if ((snap.etape - 1 + 11) % 11==10){
+      state_v.fluorays = true
+      state_v.rays = true
+    }
   };
     const handleClick_menu= (event) => {
     event.stopPropagation()
     // Mettre à jour l'état du clic
     setClic(true);
     state_v.etape = 0
+
   };
 
   // useEffect(() => {
@@ -223,7 +278,7 @@ function ModalCard() {
     </div>
     </div>
     <div className="card__title">
-    Selection : {snap.etape}
+    {snap.etape} : {dico[snap.etape]}
     </div>
     <div className="card__subtitle"> 
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

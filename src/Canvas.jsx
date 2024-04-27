@@ -153,15 +153,19 @@ function Model(props) {
   // const te = (f) => (state_v.element = dico[f], state_v.etape=f) 
   function te(f){
     state_v.etape=f
-    state_v.element = dico[f]
+    
   }
+  useEffect(() => {
+    // Cette fonction sera exécutée à chaque fois que le state_v 'element' changera
+    state_v.element = hovered ? dico[hovered] : "Projet Mosaic"
+  }, [hovered]);
   return (
     <group {...props} dispose={null}>
-    <group visible={!snap.intro} position={[-6,5,-10]} rotation={[-Math.PI/7, 0, 0]}>
+    {/*<group visible={!snap.intro} position={[-6,5,-10]} rotation={[-Math.PI/7, 0, 0]}>
     <Text  color="black" fontSize={1} letterSpacing={-0.05} >
     {hovered ? dico[hovered] : "Projet Mosaic"}
     </Text>
-    </group>
+    </group>*/}
     <mesh geometry={nodes.Cylinder.geometry} material={materials.Verre} position={[6.829, 3.561, 0.842]} scale={[0.077, 0.735, 0.077]} />
     <mesh geometry={nodes.embryo.geometry} material={materials.embryo} position={[6.836, 2.458, 0.648]} rotation={[2.418, 0.056, 0.049]} scale={0.205}/>
 
