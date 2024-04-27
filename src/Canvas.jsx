@@ -18,15 +18,17 @@ function Scene3D() {
   return (
     <>
     <Canvas gl={{ preserveDrawingBuffer: true }} eventSource={document.getElementById('root')} eventPrefix="client" shadows camera={{ position: [0, 10, 25], fov: 50 }}>
-    <Selection>
+    
     <Bkgnd/>
             {/*<Status/>*/}
+    <Selection>
     <Rig>
     <Model scale={1} position={[0,0,0]} rotation={[0, 0, 0]}/>
     </Rig>
+    </Selection>
             {/*<Sol />*/}
             {/*</Rig>*/}
-    </Selection>
+    
 
     </Canvas>
     </>
@@ -118,7 +120,8 @@ function Rig({ children }) {
 function Model(props) {
   // const { fluorays, rays } = useControls({ fluorays: false, rays: true })
   // const {fluorays, rays} = useRef(false)
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
+  const [count, setCount] = useState(0);
   const snap = useSnapshot(state_v)
   const dico={
     0:"Mosaic",
@@ -133,33 +136,24 @@ function Model(props) {
     9:"Miroir Dicroique",
     10:"Photomultiplicateur",
   }
-
-  const { scale } = useSpring({ 
-    scale: active ? 1.5 : 1,
-    config: config.wobbly
-  })
-  // variants={{
-  //           rest: { opacity: 0 },
-  //           hover: { opacity: 1 }
-  //         }}
-
+  // const { scale } = useSpring({ 
+  //   scale: active ? 1.5 : 1,
+  //   config: config.wobbly
+  // })
   const { nodes, materials } = useGLTF('Mosaic_syst.glb')
-  useFrame((state, delta) => {
-    // setActive(!active)
-    console.log()
-  });
+  // useFrame((state, delta) => {
+  //   // setActive(!active)
+  //   console.log()
+  // });
   // Hover state
   const [hovered, hover] = useState(null)
   // Debounce hover a bit to stop the ticker from being erratic , state_v.element = 1
   const debouncedHover = useCallback(debounce(hover, 30), [])
   const over = (name) => (e) => (e.stopPropagation(), debouncedHover(name)) 
-
+  // const te = (f) => (state_v.element = dico[f], state_v.etape=f) 
   function te(f){
-    state_v.element = dico[f]
     state_v.etape=f
-    // console.log(state_v)
-
-
+    state_v.element = dico[f]
   }
   return (
     <group {...props} dispose={null}>
@@ -186,7 +180,7 @@ function Model(props) {
     enabled={hovered === "4"} 
     onPointerOver={over("4")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("4"))}
+    onClick={(e) => (e.stopPropagation(), te(4))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -201,7 +195,7 @@ function Model(props) {
     enabled={hovered === "3"} 
     onPointerOver={over("3")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("3"))}
+    onClick={(e) => (e.stopPropagation(), te(3))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -227,7 +221,7 @@ function Model(props) {
     enabled={hovered === "5"} 
     onPointerOver={over("5")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("5"))}
+    onClick={(e) => (e.stopPropagation(), te(5))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -242,7 +236,7 @@ function Model(props) {
     enabled={hovered === "2"} 
     onPointerOver={over("2")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("2"))}
+    onClick={(e) => (e.stopPropagation(), te(2))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -256,7 +250,7 @@ function Model(props) {
     enabled={hovered === "1"} 
     onPointerOver={over("1")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("1"))}
+    onClick={(e) => (e.stopPropagation(), te(1))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -270,7 +264,7 @@ function Model(props) {
     enabled={hovered === "9"} 
     onPointerOver={over("9")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("9"))}
+    onClick={(e) => (e.stopPropagation(), te(9))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -285,7 +279,7 @@ function Model(props) {
     enabled={hovered === "1"} 
     onPointerOver={over("1")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("1"))}
+    onClick={(e) => (e.stopPropagation(), te(1))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -302,7 +296,7 @@ function Model(props) {
     enabled={hovered === "10"} 
     onPointerOver={over("10")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("10"))}
+    onClick={(e) => (e.stopPropagation(), te(10))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
@@ -343,14 +337,14 @@ function Model(props) {
     enabled={hovered === "6"} 
     onPointerOver={over("6")} 
     onPointerOut={() => debouncedHover(null)}
-    onClick={(e) => (e.stopPropagation(), te("6"))}
+    onClick={(e) => (e.stopPropagation(), te(6))}
       // onPointerMissed={() => (state_v.element = null)}
       // onClick={(e) => (e.stopPropagation(), (state_v.element = e.object.name))}>
     >
     <mesh visible = {snap.etape==5} geometry={nodes.Cube.geometry} material={materials.cube} position={[6.627, 2.072, 0.831]} scale={[1.891, 1.68, 1.693]}>
     <MeshTransmissionMaterial backsideThickness={10} chromaticAberration={0.015} thickness={5} temporalDistortion={0.15} distortion={0.2} ior={1.1}/>
     </mesh>
-        </Select>
+    </Select>
 
     </group>
     )

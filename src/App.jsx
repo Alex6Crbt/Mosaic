@@ -198,10 +198,10 @@ function ModalCard() {
     state_v.etape = 0
   };
 
-  useEffect(() => {
-    // Cette fonction sera exécutée à chaque fois que le state_v 'element' changera
-    setAnimation((prevAnimation) => !prevAnimation);
-  }, [snap.element]); // La dépendance ici est 'snap.element', donc cette fonction useEffect sera exécutée chaque fois que 'snap.element' changera
+  // useEffect(() => {
+  //   // Cette fonction sera exécutée à chaque fois que le state_v 'element' changera
+  //   setAnimation((prevAnimation) => !prevAnimation);
+  // }, [snap.element]); // La dépendance ici est 'snap.element', donc cette fonction useEffect sera exécutée chaque fois que 'snap.element' changera
 
   return (
     <motion.div key="animation-on-state" variants={variants} animate={animation?'op1' : 'op2'}>
