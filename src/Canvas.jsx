@@ -143,7 +143,7 @@ function Model(props) {
   //           hover: { opacity: 1 }
   //         }}
 
-  const { nodes, materials } = useGLTF('/Mosaic_syst.glb')
+  const { nodes, materials } = useGLTF('Mosaic_syst.glb')
   useFrame((state, delta) => {
     // setActive(!active)
     console.log()
@@ -356,7 +356,7 @@ function Model(props) {
     )
 }
 
-useGLTF.preload('/Mosaic_syst.glb')
+useGLTF.preload('Mosaic_syst.glb')
 
 
 
