@@ -1,15 +1,16 @@
 import { proxy } from 'valtio'
 
-const state = proxy({
+const state_v = proxy({
   intro: true,
   colors: ['#ccc', '#EFBD4E', '#80C670', '#726DE8', '#EF674E', '#353934'],
-  decals: ['react', 'three2', 'pmndrs'],
   color: '#EF674E',
-  decal: 'three2',
   element: null,
-  cam_pos: [[-8,1,0],[0,0,0]],
-  float_sp: [0, 1]
+  rays: true,
+  fluorays: true,
+  etape: 0,
+  cam_pos: [[10, 10, 20],[-8, 6, 5],[-2, 6, -10],[-2, 6, -10],[-2, 6, -10],[2, 5, 10],[2, 5, 10],[2, 5, 10],[2, 5, 10],[10, 10, -20],[10, 10, -0]],
+  cam_look: [[0,0,0],[-6, 1.88, -5.991],[-11.141, 1.656, 2.21],[-7, 1.656, 2.21],[-5.5, 1.656, 2.21],[6.627, 2.072, 0.831],[6.627, 2.072, 0.831],[6.627, 2.072, 0.831],[6.627, 2.072, 0.831],[1.747, 2.331, 1.262],[1.883, 2.699, -5.534]],
 })
 
-export { state }
+export { state_v }
 

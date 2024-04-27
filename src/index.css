@@ -148,7 +148,7 @@ button {
   font-weight: bolder;
   pointer-events: all;
   cursor: pointer;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   text-transform: uppercase;
   display: flex;
@@ -160,6 +160,10 @@ button {
 button:hover {
   box-shadow: inset 250px 0 0 0 black;
   transform: scale(1.1);
+}
+
+button:active {
+  transform: scale(1);
 }
 
 /* CUSTOMIZER */
@@ -185,11 +189,19 @@ button:hover {
   padding-right: 5px;
 }
 
-.share {
+.rays {
+  bottom: 100px;
+  position: absolute;
+  right: 40px;
+}
+
+.fluorays {
   bottom: 40px;
   position: absolute;
   right: 40px;
 }
+
+
 
 .zoom {
   position: absolute;
@@ -308,6 +320,11 @@ button:hover {
 .exit:hover {
   box-shadow: inset -250px 0 0 0 black;
 }
+
+.exit:active {
+  transform: scale(1);
+}
+
 
 @media screen and (max-width: 600px) {
   .section--container {

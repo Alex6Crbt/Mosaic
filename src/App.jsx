@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { AiFillCamera, AiOutlineArrowLeft, AiOutlineHighlight, AiOutlineShopping } from 'react-icons/ai'
 import { useSnapshot, proxy } from 'valtio'
 // import { PiVirtualRealityDuotone } from "react-icons/pi";
-import { state } from './Store'
+import { state_v } from './Store'
 import Scene3D from './Canvas'
 import { useEffect, Suspense, useState, useRef, useCallback } from "react"
 
@@ -49,7 +49,7 @@ const Loading=()=>{
 }
 
 function Overlay() {
-  const snap = useSnapshot(state)
+  const snap = useSnapshot(state_v)
   const transition = { type: 'spring', duration: 0.8 }
   const config = {
     initial: { x: -100, opacity: 0, transition: { ...transition, delay: 0.5 } },
@@ -89,7 +89,7 @@ function Overlay() {
       <strong>{"=> Deplacez vous"}</strong> sur le modele 3D.<br/><strong>{"=> Explorez"} </strong>
       les différents paramètres de la simulation
       </p>
-      <button style={{ background: snap.color }} onClick={() => (state.intro = false)}>
+      <button style={{ background: snap.color }} onClick={() => (state_v.intro = false)}>
       EXPLORER
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-rocket-takeoff" viewBox="0 0 16 16">
       <path d="M9.752 6.193c.599.6 1.73.437 2.528-.362s.96-1.932.362-2.531c-.599-.6-1.73-.438-2.528.361-.798.8-.96 1.933-.362 2.532"/>
@@ -103,7 +103,7 @@ function Overlay() {
       </div>
       <div className="decals">
       <div className="decals--container">
-      <a href="https://github.com/Alex6Crbt/Mosaic" target="_blank" rel="noopener noreferrer">{"Source >=> /Alex6Crbt/MOSAIC"}</a> 
+      <a href="https://github.com/Alex6Crbt/Mosaic/tree/web_app" target="_blank" rel="noopener noreferrer">{"Source >=> /Alex6Crbt/MOSAIC"}</a> 
       </div>
       </div>
       </motion.section>
@@ -120,38 +120,44 @@ function Overlay() {
 
 
 function DialogB() {
-  const snap = useSnapshot(state)
+  const snap = useSnapshot(state_v)
   return (
     <div className="customizer">
     <div className="color-options">
     {snap.colors.map((color) => (
-      <div key={color} className={`circle`} style={{ background: color }} onClick={() => (state.color = color)}></div>
+      <div key={color} className={`circle`} style={{ background: color }} onClick={() => (state_v.color = color)}></div>
       ))}
     </div>
     <div className="decals">
     <div className="decals--container">
-    {/*{snap.decals.map((decal) => (
-      <div key={decal} className={`decal`} onClick={() => (state.decal = decal)}>
-      <img src={decal + '_thumb.png'} alt="brand" />
-      </div>
-      ))}*/}
     {"Equipe >=> A. CORBILLET, D. DE DIETRICH, S. EA, M. MANNONI, E. REUCHIN"} <br/>
     {"Encadrants >=> G. LUCAS-LECLIN et J. MOREAU"}
     </div>
     </div>
     <button
-    className="share"
+    className="rays"
     style={{ background: snap.color }}
     onClick={() => {
-      const link = document.createElement('a')
-      link.setAttribute('download', 'canvas.png')
-      link.setAttribute('href', document.querySelector('canvas').toDataURL('image/png').replace('image/png', 'image/octet-stream'))
-      link.click()
+      state_v.rays = !snap.rays
     }}>
-    DOWNLOAD
-    <AiFillCamera size="1.3em" />
+    Rayons laser
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-lightbulb" viewBox="0 0 16 16">
+    <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+    </svg>
     </button>
-    <button className="exit" style={{ background: snap.color }} onClick={() => (state.intro = true)}>
+    <button
+    className="fluorays"
+    style={{ background: snap.color }}
+    onClick={() => {
+      state_v.fluorays = !snap.fluorays
+    }}>
+    Rayons fluorecents
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-lightning" viewBox="0 0 16 16">
+    <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641zM6.374 1 4.168 8.5H7.5a.5.5 0 0 1 .478.647L6.78 13.04 11.478 7H8a.5.5 0 0 1-.474-.658L9.306 1z"/>
+    </svg>
+    
+    </button>
+    <button className="exit" style={{ background: snap.color }} onClick={() => (state_v.intro = true)}>
     Accueil
     <AiOutlineArrowLeft size="1.3em" />
     </button>
@@ -160,7 +166,7 @@ function DialogB() {
 }
 
 function ModalCard() {
-  const snap = useSnapshot(state)
+  const snap = useSnapshot(state_v)
   const [animation, setAnimation] = useState(false);
   const variants = {
     op1: {
@@ -171,16 +177,29 @@ function ModalCard() {
     }
   };
   const [clic, setClic] = useState(false);
-  const handleClick = (event) => {
+  const handleClick_next = (event) => {
     event.stopPropagation()
-        // Mettre à jour l'état du clic
+    // Mettre à jour l'état du clic
     setClic(true);
-
-        // Ajoutez ici le code pour le comportement souhaité lorsque le bouton est cliqué
-    console.log('Le bouton a été cliqué !');
+    // console.log(snap.etape);
+    state_v.etape = (snap.etape + 1) % 11
   };
+
+  const handleClick_prev= (event) => {
+    event.stopPropagation()
+    // Mettre à jour l'état du clic
+    setClic(true);
+    state_v.etape = (snap.etape - 1 + 11) % 11
+  };
+    const handleClick_menu= (event) => {
+    event.stopPropagation()
+    // Mettre à jour l'état du clic
+    setClic(true);
+    state_v.etape = 0
+  };
+
   useEffect(() => {
-    // Cette fonction sera exécutée à chaque fois que le state 'element' changera
+    // Cette fonction sera exécutée à chaque fois que le state_v 'element' changera
     setAnimation((prevAnimation) => !prevAnimation);
   }, [snap.element]); // La dépendance ici est 'snap.element', donc cette fonction useEffect sera exécutée chaque fois que 'snap.element' changera
 
@@ -188,23 +207,23 @@ function ModalCard() {
     <motion.div key="animation-on-state" variants={variants} animate={animation?'op1' : 'op2'}>
     <div className="card">
     <div className="card__wrapper">
-    <div className="card__menu" onClick={handleClick}>
+    <div className="card__menu" onClick={handleClick_prev}>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left-circle" viewBox="0 0 16 16">
     <path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
     </svg>
     </div>
-    <div className="card__menu_2">
+    <div className="card__menu_2" onClick={handleClick_menu}>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
     <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
     </svg>
-    </div><div className="card__menu">
+    </div><div className="card__menu" onClick={handleClick_next}>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-circle" viewBox="0 0 16 16">
     <path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
     </svg>
     </div>
     </div>
     <div className="card__title">
-    Selection : {snap.element}
+    Selection : {snap.etape}
     </div>
     <div className="card__subtitle"> 
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -214,8 +233,8 @@ function ModalCard() {
     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
-    <div className="card__indicator"><span className="card__indicator-amount">135</span> Works / <span className="card__indicator-percentage">45%</span></div>
-    <div className="card__progress"><progress max="100" value="40"></progress></div>
+    <div className="card__indicator"><span className="card__indicator-amount">10</span> Étapes / <span className="card__indicator-percentage">{snap.etape*10}%</span></div>
+    <div className="card__progress"><progress max="100" value={snap.etape*10}></progress></div>
     </div>
 
     </motion.div>
