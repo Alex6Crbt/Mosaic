@@ -18,3 +18,8 @@ You can find the image processing code for the Mosaic project on the main branch
   </p>
 </div>
 
+### Python packages :
+
+```sh
+pip install -r requirements.txt
+
