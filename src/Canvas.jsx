@@ -50,9 +50,10 @@ function Rig({ children }) {
     cellSize: 0.5,
     cellThickness: 0.75,
     cellColor: '#6f6f6f',
+    // cellColor: '#6f6f6f',efb74f, 9d4b4b
     sectionSize: 3,
     sectionThickness: 1,
-    sectionColor: '#9d4b4b',
+    sectionColor: '#efb74f',
     fadeDistance: 75,
     fadeStrength: 1,
     followCamera: false,
@@ -103,8 +104,8 @@ function Rig({ children }) {
     </EffectComposer>
     <CameraControls ref={cameraControlsRef} enabled={false}/>
     <group ref={group_ref}>
-        {/*<Float speed={snap.intro?2:0} rotationIntensity={0.5} floatIntensity={1}>*/}
-    <Grid visible={snap.intro} position={[0, 0.05, 0]} args={[10.5, 10.5]} {...gridConfig} />
+        {/*visible={snap.intro} <Float speed={snap.intro?2:0} rotationIntensity={0.5} floatIntensity={1}>*/}
+    <Grid position={[0, -0.5, 0]} args={[10.5, 10.5]} {...gridConfig} />
 
     {children}
         {/*</Float>*/}
@@ -152,7 +153,9 @@ function Model(props) {
   const over = (name) => (e) => (e.stopPropagation(), debouncedHover(name)) 
   // const te = (f) => (state_v.element = dico[f], state_v.etape=f) 
   function te(f){
-    state_v.etape=f
+    if (!snap.intro){
+      state_v.etape=f
+    }
     
   }
   useEffect(() => {

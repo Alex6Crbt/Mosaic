@@ -168,7 +168,7 @@ function DialogB() {
 
 function ModalCard() {
   const dico={
-    0:"Mosaic",
+    0:"Microscopie haute-résolution à deux photons pour la biologie",
     1:"Laser & Beam extender",
     2:"Galvanomètre",
     3:"Scan Lenses",
@@ -245,7 +245,7 @@ function ModalCard() {
       state_v.rays = true
     }
   };
-    const handleClick_menu= (event) => {
+  const handleClick_menu= (event) => {
     event.stopPropagation()
     // Mettre à jour l'état du clic
     setClic(true);
@@ -277,19 +277,16 @@ function ModalCard() {
     </svg>
     </div>
     </div>
+    <div className="card__indicator"><span className="card__indicator-amount">10</span> Étapes / <span className="card__indicator-percentage">{snap.etape*10}%</span></div>
+    <div className="card__progress"><progress max="100" value={snap.etape*10}></progress></div>
     <div className="card__title">
     {snap.etape} : {dico[snap.etape]}
     </div>
     <div className="card__subtitle"> 
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    {/*{ snap.img[snap.etape] ? <img src={snap.img[snap.etape]}/> : null }*/}
+    <Txt_compo etape={snap.etape} /> {/* Appelle le composant Components avec la prop etape */}
     </div>
-    <div className="card__indicator"><span className="card__indicator-amount">10</span> Étapes / <span className="card__indicator-percentage">{snap.etape*10}%</span></div>
-    <div className="card__progress"><progress max="100" value={snap.etape*10}></progress></div>
+
     </div>
 
     </motion.div>
@@ -297,5 +294,26 @@ function ModalCard() {
 }
 
 
+function Txt_compo({ etape }) { // Déstructure la prop etape pour obtenir sa valeur
+  const E0 = () => <p><strong>Contexte :</strong> Les tissus biologiques, hautement diffusants, peuvent être rendus transparents par la méthode de clearing. On peut alors les rendre observables par microscopie optique. Un objectif idéal doit réunir un champ large, une grande ouverture ainsi qu’une longue frontale compatible avec différents milieux d’immersion d’indices différents, ce qui le rend coûteux et complexe. <br/><strong>Réalisation :</strong> En s’inspirant du télescope de Schmidt, nous avons pu retrouver la conception optique d’un article scientifique utilisant la fluorescence à deux photons. En partant de l’analyse des performances de l’objectif proposé, nous avons modélisé l’imagerie à deux photons en présence d’aberrations puis tolérancé la solution optique afin d’en proposer une conception mécanique. Par une solution de traitement d’images, il est ensuite possible de reconstituer l’échantillon biologique analysé.</p>;
+  const E1 = () => <p></p>; 
+  const E2 = () => <p></p>; 
+  const E3 = () => <p></p>; 
+  const E4 = () => <p></p>; 
+  const E5 = () => <p></p>; 
+  const E6 = () => <p></p>; 
+  const E7 = () => <p></p>; 
+  const E8 = () => <p><img src={"scan.png"}/><img src={"capte.jpg"}/></p>; 
+  const E9 = () => <p></p>; 
+  const E10 = () => <p></p>; 
+
+  const dico = [E0, E1, E2, E3, E4, E5, E6, E7, E8, E9, E10]; // Tableau de composants
+
+  return (
+    <>
+      {dico[etape]()} {/* Appelle le composant correspondant à l'indice etape */}
+    </>
+    );
+}
 
 export default App
