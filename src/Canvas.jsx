@@ -126,7 +126,7 @@ function Model(props) {
   const snap = useSnapshot(state_v)
   const dico={
     0:"Mosaic",
-    1:"Laser & Beam extender",
+    1:"Laser & Beam expander",
     2:"Galvanomètre",
     3:"Scan Lenses",
     4:"Tube Lense",
@@ -134,7 +134,7 @@ function Model(props) {
     6:"Lame de Schmit",
     7:"Miroir Sphérique",
     8:"Embryon de poulet",
-    9:"Miroir Dicroique",
+    9:"Miroir Dichroïque",
     10:"Photomultiplicateur",
   }
   // const { scale } = useSpring({ 
