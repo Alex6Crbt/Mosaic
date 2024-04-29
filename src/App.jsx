@@ -177,7 +177,7 @@ function ModalCard() {
     6:"Lame de Schmit",
     7:"Miroir Sphérique",
     8:"Embryon de poulet",
-    9:"Miroir Dicroique",
+    9:"Miroir Dichroïque",
     10:"Photomultiplicateur",
   }
   const snap = useSnapshot(state_v)
@@ -296,16 +296,16 @@ function ModalCard() {
 
 function Txt_compo({ etape }) { // Déstructure la prop etape pour obtenir sa valeur
   const E0 = () => <p><strong>Contexte :</strong> Les tissus biologiques, hautement diffusants, peuvent être rendus transparents par la méthode de clearing. On peut alors les rendre observables par microscopie optique. Un objectif idéal doit réunir un champ large, une grande ouverture ainsi qu’une longue frontale compatible avec différents milieux d’immersion d’indices différents, ce qui le rend coûteux et complexe. <br/><strong>Réalisation :</strong> En s’inspirant du télescope de Schmidt, nous avons pu retrouver la conception optique d’un article scientifique utilisant la fluorescence à deux photons. En partant de l’analyse des performances de l’objectif proposé, nous avons modélisé l’imagerie à deux photons en présence d’aberrations puis tolérancé la solution optique afin d’en proposer une conception mécanique. Par une solution de traitement d’images, il est ensuite possible de reconstituer l’échantillon biologique analysé.</p>;
-  const E1 = () => <p></p>;
+  const E1 = () => <p>Le laser emmet des photons rouges/proche IR et le beam extender permet d'élargir le diamètre du faisceau laser.</p>;
   const E2 = () => <p>À l’aide du galvanomètre, on va pouvoir modifier l’angle d’incidence du faisceau laser et déplacer le lieu de focalisation sur l’échantillon afin d’en réaliser le scan volumique.</p>; 
-  const E3 = () => <p></p>;
-  const E4 = () => <p></p>;
+  const E3 = () => <p>Les lentilles de scan constituent un système optique télécentrique permettant de : <br/> {"=> Maintenir un plan d'image plat, assurant une qualité d'image uniforme et sans distorsion."}<br/>{"=> Garantir une taille de spot minimale et constante, même lorsque l'angle du faisceau incident varie."}</p>;
+  const E4 = () => <p>{"Combiné avec les lentilles de scan pour obtenir différents rapports de grossissement, ce système optique permet d'obtenir un front d'onde plan en sortie."}</p>;
   const E5 = () => <p>Dans la cuve, on retrouve l’objectif de Schmidt avec l’échantillon à imager. La cuve (ici retirée) est remplie de la solution de clearing qui rend transparent l’échantillon biologique.</p>; 
-  const E6 = () => <p>La lame de Schmidt est le premier élément optique de l’objectif. Il s’agit d’une lame correctrice donc la première face est corrigée des aberrations sphériques induites par le miroir sphérique. La seconde face est asphérisée afin que le front d’onde du faisceau soit parallèle à la face en sortie de la lame, et donc non soumis à la réfraction.</p>; 
+  const E6 = () => <p>La lame de Schmidt est le premier élément optique de l’objectif. Il s’agit d’une lame correctrice dont la première face est corrigée des aberrations sphériques induites par le miroir sphérique. La seconde face est asphérisée afin que le front d’onde du faisceau soit parallèle à la face en sortie de la lame, et donc non soumis à la réfraction.</p>; 
   const E7 = () => <p>Le miroir est le second élément de l’objectif. Il est sphérique et la lame est placée en son centre de courbure. Il va focaliser le faisceau incident en un point précis de l’échantillon pour permettre de l’imager. Le miroir peut se déplacer dans le plan X-Y, ce déplacement ayant été quantifié par le tolérancement de l’objectif.</p>; 
-  const E8 = () => <p>L’échantillon biologique à analyser (ici l’embryon de poulet) est scanné en volume, point par point et l’image sera reconstruite à partir de ces mesures.<img src={"scan.png"}/><img src={"capte.jpg"}/></p>; 
-  const E9 = () => <p></p>;
-  const E10 = () => <p>Le photomultiplicateur est essentiel pour imager l’échantillon. L’imagerie à deux photons n’émet que très peu de photons, on augmente donc le nombre de photons par ce dispositif. Notre étude photométrique a montré qu’on obtenait une centaine de photons par molécules imagées en sortie d’objectif. Grâce au photomultiplicateur (création de photoélectrons par des électrodes), on multiplie ce nombre par 10000. On a alors suffisamment de photons pour imager.</p>; 
+  const E8 = () => <p>Les marqueurs fluorecents présents dans l'echantillon permettent l'émission d’un photon de plus basse longueur d’onde que les photons incidents. L’échantillon biologique à analyser (ici l’embryon de poulet) est scanné en volume, point par point.<img src={"scan.png"}/> L’image sera reconstruite à partir de ces mesures.<img src={"capte.jpg"}/></p>; 
+  const E9 = () => <p>Le miroir dichroïque permet de réflechir uniquement les photons de issus de la fluorescence vers le photomultiplicateur</p>;
+  const E10 = () => <p>Le photomultiplicateur est essentiel pour imager l’échantillon. L’imagerie de fluorescence à deux photons n’émet que très peu de photons, on augmente donc le nombre de photons par ce dispositif. Notre étude photométrique a montré qu’on obtenait une centaine de photons par molécules imagées en sortie d’objectif. Grâce au photomultiplicateur (création de photoélectrons par des électrodes), on multiplie ce nombre par 10000. On a alors suffisamment de photons pour imager.</p>; 
 
   const dico = [E0, E1, E2, E3, E4, E5, E6, E7, E8, E9, E10]; // Tableau de composants
 
@@ -317,3 +317,4 @@ function Txt_compo({ etape }) { // Déstructure la prop etape pour obtenir sa va
 }
 
 export default App
+
