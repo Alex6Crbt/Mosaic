@@ -103,7 +103,7 @@ function Overlay() {
       </div>
       <div className="decals">
       <div className="decals--container">
-      <a href="https://github.com/Alex6Crbt/Mosaic/tree/web_app" target="_blank" rel="noopener noreferrer">{"Source >=> /Alex6Crbt/MOSAIC"}</a> 
+      <a href="https://github.com/Alex6Crbt/Mosaic" target="_blank" rel="noopener noreferrer">{"Source >=> /Alex6Crbt/MOSAIC"}</a> 
       </div>
       </div>
       </motion.section>
